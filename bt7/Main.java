@@ -1,6 +1,5 @@
 package bt7;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -14,6 +13,9 @@ public class Main {
             System.out.println("Mảng không có phần tử");
         } else {
             int[] array = new int[n];
+            int[] temp = new int[n]; // Mảng tạm thời để lưu sắp xếp
+            int evenIndex = 0; // Chỉ số cho số chẵn
+            int oddIndex = n - 1; // Chỉ số cho số lẻ
 
             System.out.println("Nhập các phần tử của mảng:");
             for (int i = 0; i < n; i++) {
@@ -21,24 +23,20 @@ public class Main {
                 array[i] = scanner.nextInt();
             }
 
-            // Khởi tạo danh sách cho số chẵn và số lẻ
-            ArrayList<Integer> evenNumbers = new ArrayList<>();
-            ArrayList<Integer> oddNumbers = new ArrayList<>();
-
             for (int num : array) {
                 if (num % 2 == 0) {
-                    evenNumbers.add(num);
+                    temp[evenIndex++] = num; // Số chẵn đưa về đầu
                 } else {
-                    oddNumbers.add(num);
+                    temp[oddIndex--] = num; // Số lẻ đưa về cuối
                 }
             }
 
+            // Sao chép lại thứ tự từ mảng temp vào array
+            System.arraycopy(temp, 0, array, 0, n);
+
             System.out.println("Mảng sau khi sắp xếp:");
-            for (int even : evenNumbers) {
-                System.out.print(even + " ");
-            }
-            for (int odd : oddNumbers) {
-                System.out.print(odd + " ");
+            for (int num : array) {
+                System.out.print(num + " ");
             }
             System.out.println();
         }
